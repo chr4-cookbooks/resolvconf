@@ -36,9 +36,10 @@ action :create do
     new_resource.updated_by_last_action(true) if r.updated_by_last_action?
   end
 
-  execute "#{new_resource.name}: delete dns-* configuration from /etc/network/interfaces" do
-    command "sed -i '/\\s*dns-/d' /etc/network/interfaces"
-    only_if { new_resource.clear_dns_from_interfaces }
+  if new_resource.clear_dns_from_interfaces
+    interfaces = Chef::Util::FileEdit.new('/etc/network/interfaces')
+    interfaces.search_file_delete_line(/^\s*dns-/)
+    interfaces.write_file
   end
 
   execute 'resolvconf -u'
