@@ -2,11 +2,12 @@
 
 This file is used to list changes made in each version of resolvconf.
 
+## 0.1.1:
+
+* Add tests (using kitchen, see TESTING.md)
+* Run resolvconf --enable-updates before resolvconf -u (when supported)
+* Use Chef::Util::FileEdit instead of execute() and sed
+
 ## 0.1.0:
 
 * Initial release of resolvconf
-
-- - -
-Check the [Markdown Syntax Guide](http://daringfireball.net/projects/markdown/syntax) for help with Markdown.
-
-The [Github Flavored Markdown page](http://github.github.com/github-flavored-markdown/) describes the differences between markdown on github and standard markdown.
