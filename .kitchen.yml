@@ -1,0 +1,42 @@
+---
+driver_plugin: vagrant
+driver_config:
+  require_chef_omnibus: true
+
+platforms:
+- name: ubuntu-13.04
+  driver_config:
+    box: canonical-ubuntu-13.04
+    box_url: http://cloud-images.ubuntu.com/vagrant/raring/current/raring-server-cloudimg-amd64-vagrant-disk1.box
+
+- name: ubuntu-12.10
+  driver_config:
+    box: opscode-ubuntu-12.10
+    box_url: https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-12.10_provisionerless.box
+
+- name: ubuntu-12.04
+  driver_config:
+    box: opscode-ubuntu-12.04
+    box_url: https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box
+
+- name: ubuntu-10.04
+  driver_config:
+    box: opscode-ubuntu-10.04
+    box_url: https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-10.04_provisionerless.box
+
+- name: debian-6
+  driver_config:
+    box: opscode-debian-6
+    box_url: http://opscode-vm.s3.amazonaws.com/vagrant/opscode_debian-6.0.7_chef-11.2.0.box
+
+
+suites:
+- name: default
+  run_list:
+  - recipe[minitest-handler]
+  - recipe[resolvconf]
+  attributes:
+    resolvconf:
+      nameserver: [ '8.8.8.8', '8.8.4.4' ]
+      search: [ test.com, example.com ]
+      options: rotate
