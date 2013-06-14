@@ -42,5 +42,11 @@ action :create do
     interfaces.write_file
   end
 
+  execute 'resolvconf --enable-updates' do
+    # older systems do not support --enable-updates
+    # but should work nonetheless
+    ignore_failure true
+  end
+
   execute 'resolvconf -u'
 end
