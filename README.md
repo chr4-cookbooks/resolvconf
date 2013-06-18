@@ -59,6 +59,11 @@ It will do the following
 - Remove dns-* lines from /etc/network/interfaces (unless clear_dns_form_interfaces is specified)
 - Run 'resolvconf -u'
 
+Before using the provider, you probably want to ensure that the resolvconf package is installed.
+
+```ruby
+include_recipe 'resolvconf::install'
+```
 
 Example:
 
