@@ -21,7 +21,7 @@
 require File.expand_path('../support/helpers', __FILE__)
 
 describe 'resolvconf::default' do
-  include Helpers::Resolvconf
+  include Helpers::TestHelper
 
   it 'installs resolvconf package' do
     package('resolvconf').must_be_installed
