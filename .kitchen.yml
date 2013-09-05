@@ -24,16 +24,10 @@ platforms:
     box: opscode-ubuntu-10.04
     box_url: https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_ubuntu-10.04_provisionerless.box
 
-- name: debian-6
-  driver_config:
-    box: opscode-debian-6
-    box_url: http://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_debian-6.0.7_provisionerless.box
-
-# debian-7 has no curl/wget, so cannot install chef-client
-#- name: debian-7
-#  driver_config:
-#    box: opscode-debian-7
-#    box_url: http://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_debian-7.0.0_provisionerless.box
+# - name: debian-7.1.0
+#   driver_config:
+#     box: opscode-debian-7.1.0
+#     box_url: http://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_debian-7.1.0_provisionerless.box
 
 
 suites:
