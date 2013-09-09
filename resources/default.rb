@@ -22,15 +22,16 @@ actions        :create
 default_action :create
 
 # dns options (defaulting to opendns nameservers)
-attribute :nameserver, :kind_of => [ Array, String ], :default => node['resolvconf']['nameserver']
-attribute :search,     :kind_of => [ Array, String ], :default => node['resolvconf']['search']
-attribute :options,    :kind_of => [ Array, String ], :default => node['resolvconf']['options']
+attribute :nameserver, kind_of: [ Array, String ], default: node['resolvconf']['nameserver']
+attribute :search,     kind_of: [ Array, String ], default: node['resolvconf']['search']
+attribute :options,    kind_of: [ Array, String ], default: node['resolvconf']['options']
 
 # removes all dns-* entries from /etc/network/interfaces if true
-attribute :clear_dns_from_interfaces, :kind_of => [ TrueClass, FalseClass ],
-          :default => node['resolvconf']['clear-dns-from-interfaces']
+attribute :clear_dns_from_interfaces,
+          kind_of: [ TrueClass, FalseClass ],
+          default: node['resolvconf']['clear-dns-from-interfaces']
 
 # these elements will be placed in the corresponding file in /etc/resolvconf/resolv.conf.d/
-attribute :head, :kind_of => [ Array, String ], :default => node['resolvconf']['head']
-attribute :base, :kind_of => [ Array, String ], :default => node['resolvconf']['base']
-attribute :tail, :kind_of => [ Array, String ], :default => node['resolvconf']['tail']
+attribute :head, kind_of: [ Array, String ], default: node['resolvconf']['head']
+attribute :base, kind_of: [ Array, String ], default: node['resolvconf']['base']
+attribute :tail, kind_of: [ Array, String ], default: node['resolvconf']['tail']
