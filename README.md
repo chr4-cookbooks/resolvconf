@@ -86,6 +86,20 @@ resolvconf 'custom' do
 end
 ```
 
+If you do not want to use resolvconf, you can still use this recipe to maintain your /etc/resolv.conf using the "fallback" provider.
+
+```ruby
+resolvconf 'custom' do
+  provider   Chef::Provider::ResolvconfFallback
+
+  nameserver '8.8.8.8'
+  search     'mydomain.com'
+  options    'rotate'
+
+  head       "# Don't touch this configuration file!"
+  base       "# Will be added after nameserver, search, options config items"
+  tail       "# This goes to the end of the file."
+end
 
 ## Recipes
 
