@@ -31,7 +31,7 @@ platforms:
 
 
 suites:
-- name: default
+- name: all
   run_list:
   - recipe[minitest-handler]
   - recipe[resolvconf]
@@ -40,3 +40,20 @@ suites:
       nameserver: [ '8.8.8.8', '8.8.4.4' ]
       search: [ test.com, example.com ]
       options: rotate
+
+- name: without-options
+  run_list:
+  - recipe[minitest-handler]
+  - recipe[resolvconf]
+  attributes:
+    resolvconf:
+      nameserver: '8.8.8.8'
+      search: test.com
+
+- name: only-nameserver
+  run_list:
+  - recipe[minitest-handler]
+  - recipe[resolvconf]
+  attributes:
+    resolvconf:
+      nameserver: '8.8.8.8'

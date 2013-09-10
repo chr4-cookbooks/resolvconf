@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: resolvconf
-# Test:: default
+# Test:: without-options
 #
 # Copyright 2012, Chris Aumann
 #
@@ -27,19 +27,16 @@ describe 'resolvconf::default' do
     package('resolvconf').must_be_installed
   end
 
-  it 'must set dns nameservers correctly' do
+  it 'sets dns nameserver correctly' do
     file('/etc/resolv.conf').must_include('nameserver 8.8.8.8')
-    file('/etc/resolv.conf').must_include('nameserver 8.8.4.4')
   end
 
-  it 'must set dns search correctly' do
-    # file('/etc/resolv.conf').must_include('search test.com example.com')
+  it 'sets dns search correctly' do
     file('/etc/resolv.conf').must_match(/^search .*test.com/)
-    file('/etc/resolv.conf').must_match(/^search .*example.com/)
   end
 
-  it 'must set dns options correctly' do
-    file('/etc/resolv.conf').must_include('options rotate')
+  it 'sets dns options correctly' do
+    file('/etc/resolv.conf').wont_match(/^options/)
   end
 
   it 'makes sure all dns-* entries are removed from /etc/network/interfaces' do
