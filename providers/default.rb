@@ -43,8 +43,7 @@ action :create do
   end
 
   execute 'resolvconf --enable-updates' do
-    # older systems do not support --enable-updates
-    # but should work nonetheless
+    # Older systems do not support --enable-updates, but should work nonetheless
     ignore_failure true
   end
 
