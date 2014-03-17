@@ -21,9 +21,9 @@
 action :create do
   options = {}
   options['head'] = Array(new_resource.head)
-  options['base'] = Array(new_resource.nameserver).map { |ns| "nameserver #{ns}"}
+  options['base'] = Array(new_resource.nameserver).map { |ns| "nameserver #{ns}" }
   options['base'] += Array("search #{Array(new_resource.search).join(' ')}") unless Array(new_resource.search).empty?
-  options['base'] += Array(new_resource.options).map { |opt| "options #{opt}"}
+  options['base'] += Array(new_resource.options).map { |opt| "options #{opt}" }
   options['base'] += Array(new_resource.base)
   options['tail'] = Array(new_resource.tail)
 
