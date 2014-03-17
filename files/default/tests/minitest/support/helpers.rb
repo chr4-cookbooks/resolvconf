@@ -18,6 +18,7 @@
 #
 
 module Helpers
+  # Test helpers for chef-kitchen
   module TestHelper
     require 'chef/mixin/shell_out'
     include Chef::Mixin::ShellOut
