@@ -31,6 +31,11 @@ action :create do
     r = file "/etc/resolvconf/resolv.conf.d/#{name}" do
       mode    00644
       content "#{options[name].join("\n")}\n"
+
+      # Remove file if it is not a regular file (e.g. a symlink)
+      # This is useful, as sometimes the backup stored in the file "original"
+      # is symlinked to "tail"
+      force_unlink true
     end
 
     new_resource.updated_by_last_action(true) if r.updated_by_last_action?
