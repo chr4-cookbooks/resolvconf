@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: resolvconf
-# Test:: without-options
+# Test:: without_options
 #
 # Copyright 2012, Chris Aumann
 #

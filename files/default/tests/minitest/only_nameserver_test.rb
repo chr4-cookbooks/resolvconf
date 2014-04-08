@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: resolvconf
-# Test:: only-nameserver
+# Test:: only_nameserver
 #
 # Copyright 2012, Chris Aumann
 #
