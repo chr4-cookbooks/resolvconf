@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of resolvconf.
 
+## 0.2.0:
+
+* Remove potential symlinks before deploying new configuration
+
 ## 0.1.1:
 
 * Add tests (using kitchen, see TESTING.md)
