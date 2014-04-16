@@ -35,7 +35,11 @@ action :create do
       # Remove file if it is not a regular file (e.g. a symlink)
       # This is useful, as sometimes the backup stored in the file "original"
       # is symlinked to "tail"
-      force_unlink true
+
+      # bug with force_unlink in chef 11.12 override
+      if ::File.exist? "/etc/resolvconf/resolv.conf.d/#{name}"
+        force_unlink true
+      end
     end
 
     new_resource.updated_by_last_action(true) if r.updated_by_last_action?
