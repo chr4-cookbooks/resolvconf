@@ -26,7 +26,8 @@ if value_for_platform({"ubuntu" => {"10.04" => true}, "default" => false})
   sfix = %q(\[ -f "$BASEFILE" \] \&\& RSLVCNFFILES="$RSLVCNFFILES\n$BASEFILE")
   unless %x(grep '#{line}' /etc/resolvconf/update.d/libc).empty?
     %x(cat /etc/resolvconf/update.d/libc | sed '/#{line}/{N;s/.*/#{sfix}/}' > /tmp/resolvconf_libc_642222.fix;
-        mv /tmp/resolvconf_libc_642222.fix /etc/resolvconf/update.d/libc
+        cat /tmp/resolvconf_libc_642222.fix > /etc/resolvconf/update.d/libc;
+        rm /tmp/resolvconf_libc_642222.fix
       )
   end
 end
