@@ -30,7 +30,7 @@ if value_for_platform({"ubuntu" => {"10.04" => true}, "default" => false})
       cat /tmp/resolvconf_libc_642222.fix > /etc/resolvconf/update.d/libc
       rm  /tmp/resolvconf_libc_642222.fix
     EOH
-    not_if "grep '#{line}' /etc/resolvconf/update.d/libc"
+    only_if "grep -q '#{line}' /etc/resolvconf/update.d/libc"
   end
 end
 
