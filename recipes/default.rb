@@ -20,4 +20,15 @@
 
 include_recipe 'resolvconf::install'
 
+if value_for_platform({"ubuntu" => {"10.04" => true}, "default" => false})
+  # fix buggy behaviour of resolvconf in ubuntu 10.04 (debian bug #642222)
+  line = %q(\[ -f "$BASEFILE" \] \&\& RSLVCNFFILES="$BASEFILE)
+  sfix = %q(\[ -f "$BASEFILE" \] \&\& RSLVCNFFILES="$RSLVCNFFILES\n$BASEFILE")
+  unless %x(grep '#{line}' /etc/resolvconf/update.d/libc).empty?
+    %x(cat /etc/resolvconf/update.d/libc | sed '/#{line}/{N;s/.*/#{sfix}/}' > /tmp/resolvconf_libc_642222.fix;
+        mv /tmp/resolvconf_libc_642222.fix /etc/resolvconf/update.d/libc
+      )
+  end
+end
+
 resolvconf 'default'
