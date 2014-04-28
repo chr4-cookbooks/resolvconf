@@ -36,6 +36,7 @@ action :create do
       # This is useful, as sometimes the backup stored in the file "original"
       # is symlinked to "tail"
       force_unlink true
+      only_if do ::File.exist?("/etc/resolvconf/resolv.conf.d/#{name}") end
     end
 
     new_resource.updated_by_last_action(true) if r.updated_by_last_action?
