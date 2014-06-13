@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of resolvconf.
 
+## 0.2.1:
+
+* Add small workaround for `force_unlink` bug in Chef, fixed (but not released) in https://github.com/opscode/chef/pull/1383
+
 ## 0.2.0:
 
 * Remove potential symlinks before deploying new configuration
