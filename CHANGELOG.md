@@ -2,9 +2,16 @@
 
 This file is used to list changes made in each version of resolvconf.
 
+## 0.2.2:
+
+- Remove a workaround for `force_unlink`, fix was merged in Chef 11.12.0
+- Clear `/run/resolvconf/interface/` directory before updating `/etc/resolv.conf`, to prevent
+  deprecated entries from ending up in the file
+
 ## 0.2.1:
 
-* Add small workaround for `force_unlink` bug in Chef, fixed (but not released) in https://github.com/opscode/chef/pull/1383
+* Add small workaround for `force_unlink` bug in Chef, fixed (but not released) in
+  https://github.com/opscode/chef/pull/1383
 
 ## 0.2.0:
 
