@@ -27,7 +27,7 @@ action :create do
   options['base'] += Array(new_resource.base)
   options['tail'] = Array(new_resource.tail)
 
-  options.each do |name, config|
+  options.each do |name, _|
     r = file "/etc/resolvconf/resolv.conf.d/#{name}" do
       mode    00644
       content "#{options[name].join("\n")}\n"
