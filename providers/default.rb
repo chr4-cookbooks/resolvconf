@@ -47,6 +47,10 @@ action :create do
     interfaces.write_file
   end
 
+  # Wipe old configuration settings from runtime directory, as they'd end up in /etc/resolv.conf
+  # otherwise. Older systems do not support this, should fail silently though.
+  execute 'rm -f /run/resolvconf/interface/*'
+
   execute 'resolvconf --enable-updates' do
     # Older systems do not support --enable-updates, but should work nonetheless
     ignore_failure true
