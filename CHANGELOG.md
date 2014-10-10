@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of resolvconf.
 
+## 0.2.3:
+
+- Add support for sortlist and domain settings
+
 ## 0.2.2:
 
 - Remove a workaround for `force_unlink`, fix was merged in Chef 11.12.0
