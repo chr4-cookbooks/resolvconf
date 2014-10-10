@@ -25,6 +25,8 @@ default_action :create
 attribute :nameserver, kind_of: [Array, String], default: node['resolvconf']['nameserver']
 attribute :search,     kind_of: [Array, String], default: node['resolvconf']['search']
 attribute :options,    kind_of: [Array, String], default: node['resolvconf']['options']
+attribute :domain,     kind_of: [Array, String], default: node['resolvconf']['domain']
+attribute :sortlist,   kind_of: [Array, String], default: node['resolvconf']['sortlist']
 
 # Remove all dns-* entries from /etc/network/interfaces
 attribute :clear_dns_from_interfaces,
