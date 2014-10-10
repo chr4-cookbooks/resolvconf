@@ -11,7 +11,9 @@ A system that supports resolvconf.
 
 Furthermore you need to add the following line to your metadata.rb
 
-    depends 'resolvconf'
+```ruby
+depends 'resolvconf'
+```
 
 
 ## Attributes
@@ -22,9 +24,11 @@ Use the following attributes to specify your nameserver(s) to use, the search do
 Each attribute supports strings, as well as arrays with multiple elements.
 
 ```ruby
-node['resolvconf']['nameserver'] = [ '208.67.222.222', '208.67.220.220' ] # Set nameserver(s) to use
+node['resolvconf']['nameserver'] = %w(208.67.222.222 208.67.220.220) # Set nameserver(s) to use
 node['resolvconf']['search'] = node['domain'] # Set domains to search
+node['resolvconf']['domain'] = 'custom.com' # Defaults to node['domain']
 node['resolvconf']['options'] = [] # Set options
+node['resolvconf']['sortlist'] = ['130.155.160.0/255.255.240.0 130.155.0.0'] # Default is empty
 ```
 
 
@@ -40,7 +44,7 @@ node['resolvconf']['tail'] = []
 ```
 
 
-By default, the recipe removes any dns-* configuration lines from /etc/network/interfaces,
+By default, the recipe removes any dns-\* configuration lines from /etc/network/interfaces,
 as they might interferre with the configured settings.
 
 ```ruby
@@ -56,7 +60,7 @@ The LWRP basically supports all options that can be set via attributes, and uses
 It will do the following
 
 - It will create the necessary files in /etc/resolvconf/resolv.conf.d/
-- Remove dns-* lines from /etc/network/interfaces (unless clear_dns_form_interfaces is specified)
+- Remove dns-\* lines from /etc/network/interfaces (unless `clear_dns_form_interfaces` is specified)
 - Run 'resolvconf -u'
 
 Before using the provider, you probably want to ensure that the resolvconf package is installed.
@@ -75,7 +79,9 @@ resolvconf 'default'
 resolvconf 'custom' do
   nameserver '8.8.8.8'
   search     'mydomain.com'
+  domain     'mydomain.com'
   options    'rotate'
+  sortlist   'mysortlist'
 
   head       "# Don't touch this configuration file!"
   base       "# Will be added after nameserver, search, options config items"
