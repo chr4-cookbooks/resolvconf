@@ -32,6 +32,10 @@ describe 'resolvconf::default' do
     file('/etc/resolv.conf').must_match(/^nameserver\s+8\.8\.4\.4$/)
   end
 
+  it 'sets dns domain correctly' do
+    file('/etc/resolv.conf').must_match(/^domain\s+example.com$/)
+  end
+
   it 'sets dns search correctly' do
     # Check whether both domains exist in search list, and whether they are in the same line
     file('/etc/resolv.conf').must_match(/^search\s+.*example.com/)
@@ -41,6 +45,10 @@ describe 'resolvconf::default' do
 
   it 'sets dns options correctly' do
     file('/etc/resolv.conf').must_match(/^options\s+rotate$/)
+  end
+
+  it 'sets dns sortlist correctly' do
+    file('/etc/resolv.conf').must_match(/^sortlist\s+130\.155\.160\.0\/255\.255\.240\.0\s+130\.155\.0\.0$/)
   end
 
   it 'makes sure all dns-* entries are removed from /etc/network/interfaces' do
