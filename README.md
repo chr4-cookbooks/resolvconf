@@ -26,7 +26,6 @@ Each attribute supports strings, as well as arrays with multiple elements.
 ```ruby
 node['resolvconf']['nameserver'] = %w(208.67.222.222 208.67.220.220) # Set nameserver(s) to use
 node['resolvconf']['search'] = node['domain'] # Set domains to search
-node['resolvconf']['domain'] = 'custom.com' # Defaults to node['domain']
 node['resolvconf']['options'] = [] # Set options
 node['resolvconf']['sortlist'] = ['130.155.160.0/255.255.240.0 130.155.0.0'] # Default is empty
 ```
@@ -79,7 +78,6 @@ resolvconf 'default'
 resolvconf 'custom' do
   nameserver '8.8.8.8'
   search     'mydomain.com'
-  domain     'mydomain.com'
   options    'rotate'
   sortlist   'mysortlist'
 

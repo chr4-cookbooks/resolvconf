@@ -35,10 +35,6 @@ describe 'resolvconf::default' do
     file('/etc/resolv.conf').must_match(/^search\s+#{node['domain']}$/)
   end
 
-  it 'sets dns search correctly' do
-    file('/etc/resolv.conf').must_match(/^domain\s+#{node['domain']}$/)
-  end
-
   it 'sets dns options correctly' do
     file('/etc/resolv.conf').wont_match(/^options/)
   end

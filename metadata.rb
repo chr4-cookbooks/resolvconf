@@ -18,10 +18,6 @@ attribute 'resolvconf/search',
           description: 'Domain(s) to add to search',
           default: "node['domain']"
 
-attribute 'resolvconf/domain',
-          description: 'Domain to use for domain option',
-          default: "node['domain']"
-
 attribute 'resolvconf/options',
           description: 'Options to set',
           default: '[]'
