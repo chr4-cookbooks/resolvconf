@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of resolvconf.
 
+## 0.2.4:
+
+- Remove support for the domain attribute, as resolvconf ignores it. Use search attribute instead.
+
 ## 0.2.3:
 
 - Add support for sortlist and domain settings
