@@ -4,7 +4,7 @@ maintainer_email 'me@chr4.org'
 license          'GNU Public License 3.0'
 description      'Installs/Configures resolvconf'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          '0.2.0'
+version          '0.2.4'
 supports         'ubuntu', '>= 10.04'
 supports         'debian', '>= 6.0'
 recipe           'resolvconf', 'Installs and configures resolvconf package'
@@ -20,6 +20,10 @@ attribute 'resolvconf/search',
 
 attribute 'resolvconf/options',
           description: 'Options to set',
+          default: '[]'
+
+attribute 'resolvconf/sortlist',
+          description: 'Sortlist to use',
           default: '[]'
 
 attribute 'resolvconf/head',

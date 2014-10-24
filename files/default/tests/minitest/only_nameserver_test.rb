@@ -28,11 +28,11 @@ describe 'resolvconf::default' do
   end
 
   it 'sets dns nameserver correctly' do
-    file('/etc/resolv.conf').must_include('nameserver 8.8.8.8')
+    file('/etc/resolv.conf').must_match(/^nameserver\s+8\.8\.8\.8/)
   end
 
   it 'sets dns search correctly' do
-    file('/etc/resolv.conf').must_match(/^search #{node['domain']}/)
+    file('/etc/resolv.conf').must_match(/^search\s+#{node['domain']}$/)
   end
 
   it 'sets dns options correctly' do

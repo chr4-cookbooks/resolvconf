@@ -33,7 +33,9 @@ suites:
   attributes:
     resolvconf:
       nameserver: [ '8.8.8.8', '8.8.4.4' ]
+      domain: 'example.com'
       search: [ test.com, example.com ]
+      sortlist: [ '130.155.160.0/255.255.240.0 130.155.0.0' ]
       options: rotate
 
 - name: without-options

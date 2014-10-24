@@ -28,18 +28,23 @@ describe 'resolvconf::default' do
   end
 
   it 'sets dns nameservers correctly' do
-    file('/etc/resolv.conf').must_include('nameserver 8.8.8.8')
-    file('/etc/resolv.conf').must_include('nameserver 8.8.4.4')
+    file('/etc/resolv.conf').must_match(/^nameserver\s+8\.8\.8\.8$/)
+    file('/etc/resolv.conf').must_match(/^nameserver\s+8\.8\.4\.4$/)
   end
 
   it 'sets dns search correctly' do
-    # file('/etc/resolv.conf').must_include('search test.com example.com')
-    file('/etc/resolv.conf').must_match(/^search .*test.com/)
-    file('/etc/resolv.conf').must_match(/^search .*example.com/)
+    # Check whether both domains exist in search list, and whether they are in the same line
+    file('/etc/resolv.conf').must_match(/^search\s+.*example.com/)
+    file('/etc/resolv.conf').must_match(/^search\s+.*test.com/)
+    file('/etc/resolv.conf').must_match(/^search\s+(test.com|example.com)\s+(test.com|example.com)$/)
   end
 
   it 'sets dns options correctly' do
-    file('/etc/resolv.conf').must_include('options rotate')
+    file('/etc/resolv.conf').must_match(/^options\s+rotate$/)
+  end
+
+  it 'sets dns sortlist correctly' do
+    file('/etc/resolv.conf').must_match(/^sortlist\s+130\.155\.160\.0\/255\.255\.240\.0\s+130\.155\.0\.0$/)
   end
 
   it 'makes sure all dns-* entries are removed from /etc/network/interfaces' do

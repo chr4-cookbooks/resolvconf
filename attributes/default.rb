@@ -27,8 +27,9 @@ default['resolvconf']['base'] = []
 default['resolvconf']['tail'] = []
 
 # Shortcuts for specify /etc/resolv.conf options (will be added to node['resolvconf']['base'])
-default['resolvconf']['nameserver'] = ['208.67.222.222', '208.67.220.220'] # OpenDNS
+default['resolvconf']['nameserver'] = %w(208.67.222.222 208.67.220.220) # OpenDNS
 default['resolvconf']['search'] = node['domain']
+default['resolvconf']['sortlist'] = []
 default['resolvconf']['options'] = []
 
 # Remove all dns-* entries from /etc/network/interfaces

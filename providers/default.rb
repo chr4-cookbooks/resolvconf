@@ -23,11 +23,12 @@ action :create do
   options['head'] = Array(new_resource.head)
   options['base'] = Array(new_resource.nameserver).map { |ns| "nameserver #{ns}" }
   options['base'] += Array("search #{Array(new_resource.search).join(' ')}") unless Array(new_resource.search).empty?
+  options['base'] += Array(new_resource.sortlist).map { |sortlist| "sortlist #{sortlist}" }
   options['base'] += Array(new_resource.options).map { |opt| "options #{opt}" }
   options['base'] += Array(new_resource.base)
   options['tail'] = Array(new_resource.tail)
 
-  options.each do |name, config|
+  options.each do |name, _|
     r = file "/etc/resolvconf/resolv.conf.d/#{name}" do
       mode    00644
       content "#{options[name].join("\n")}\n"
@@ -50,6 +51,10 @@ action :create do
     interfaces.search_file_delete_line(/^\s*dns-/)
     interfaces.write_file
   end
+
+  # Wipe old configuration settings from runtime directory, as they'd end up in /etc/resolv.conf
+  # otherwise. Older systems do not support this, should fail silently though.
+  execute 'rm -f /run/resolvconf/interface/*'
 
   execute 'resolvconf --enable-updates' do
     # Older systems do not support --enable-updates, but should work nonetheless
