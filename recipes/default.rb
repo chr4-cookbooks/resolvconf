@@ -20,6 +20,7 @@
 
 include_recipe 'resolvconf::install'
 
+# TODO: This fix needs to be removed once Ubuntu 10.04 support runs out (Q1 2015)
 if value_for_platform({'ubuntu' => {'10.04' => true}, 'default' => false})
   # fix buggy behaviour of resolvconf in ubuntu 10.04 (debian bug #642222)
   line = %q(\[ -f "$BASEFILE" \] \&\& RSLVCNFFILES="$BASEFILE)
