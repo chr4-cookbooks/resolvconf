@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of resolvconf.
 
+## 0.2.5:
+
+- Include a workaround for Ubuntu-10.04 (Debian bug #642222)
+
 ## 0.2.4:
 
 - Remove support for the domain attribute, as resolvconf ignores it. Use search attribute instead.
