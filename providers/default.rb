@@ -51,9 +51,14 @@ action :create do
     interfaces.write_file
   end
 
+  broken_order = value_for_platform({ 
+    'ubuntu'  => { '10.04' => true },
+    'default' => false
+  })
+
   # Wipe old configuration settings from runtime directory, as they'd end up in /etc/resolv.conf
   # otherwise. Older systems do not support this, should fail silently though.
-  execute 'rm -f /run/resolvconf/interface/*'
+  execute('rm -f /run/resolvconf/interface/*') if broken_order
 
   execute 'resolvconf --enable-updates' do
     # Older systems do not support --enable-updates, but should work nonetheless
