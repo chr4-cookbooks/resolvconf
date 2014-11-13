@@ -50,6 +50,15 @@ as they might interferre with the configured settings.
 node['resolvconf']['clear-dns-from-interfaces'] = true
 ```
 
+You can force the resolvconf cookbook to wipe old entries from the runtime directories. Use this if
+you have trouble with old resolv.conf entries ending up in your configuration.
+This is not enabled by default, as it removes the dynamic capabilities of resolvconf which enable
+applications to change nameserver settings on the fly.
+
+```ruby
+node['resolvconf']['wipe-runtime-directory'] = false
+```
+
 
 ## Provider
 

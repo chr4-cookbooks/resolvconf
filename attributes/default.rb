@@ -34,3 +34,8 @@ default['resolvconf']['options'] = []
 
 # Remove all dns-* entries from /etc/network/interfaces
 default['resolvconf']['clear-dns-from-interfaces'] = true
+
+# Wipe runtime directory to make sure old resolv.conf entries are properly removed.
+# This is not enabled by default, as it breaks the dynamic capabilities for applications to change
+# nameserver entries.
+default['resolvconf']['wipe-runtime-directory'] = false
