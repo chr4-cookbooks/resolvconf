@@ -2,6 +2,12 @@
 
 This file is used to list changes made in each version of resolvconf.
 
+## 0.2.6:
+
+- `/run/resolvconf/interface/` is wiped only when `node['resolvconf']['wipe-runtime-directory']` is
+  set to `true`. Defaults to false. This resolves issues with applications using the dynamic
+  nameserver configuration capabilities of resolvconf.
+
 ## 0.2.5:
 
 - Include a workaround for Ubuntu-10.04 (Debian bug #642222)
