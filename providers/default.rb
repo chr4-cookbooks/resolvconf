@@ -27,6 +27,7 @@ action :create do
   options['base'] += Array(new_resource.options).map { |opt| "options #{opt}" }
   options['base'] += Array(new_resource.base)
   options['tail'] = Array(new_resource.tail)
+  any_configuration_updated = false
 
   options.each do |name, _|
     r = file "/etc/resolvconf/resolv.conf.d/#{name}" do
@@ -41,7 +42,7 @@ action :create do
       # we need to check whether the file actually exists before setting force_unlink
       force_unlink true if ::File.exist?("/etc/resolvconf/resolv.conf.d/#{name}")
     end
-
+    any_configuration_updated ||= r.updated_by_last_action?
     new_resource.updated_by_last_action(true) if r.updated_by_last_action?
   end
 
@@ -57,8 +58,11 @@ action :create do
 
   execute 'resolvconf --enable-updates' do
     # Older systems do not support --enable-updates, but should work nonetheless
+    not_if "resolvconf --updates-are-enabled"
     ignore_failure true
   end
-
-  execute 'resolvconf -u'
+  
+  execute 'resolvconf -u' do
+    only_if { any_configuration_updated }
+  end
 end
