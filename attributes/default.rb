@@ -39,3 +39,22 @@ default['resolvconf']['clear-dns-from-interfaces'] = true
 # This is not enabled by default, as it breaks the dynamic capabilities for applications to change
 # nameserver entries.
 default['resolvconf']['wipe-runtime-directory'] = false
+
+# these are the defaults, so lets place them here as to not disrupt the current state of things.
+default['resolvconf']['interface-order'] = [
+  'lo.inet*',
+  'lo.dnsmasq',
+  'lo.pdnsd',
+  'lo.!(pdns|pdns-recursor)',
+  'lo',
+  'tun*',
+  'tap*',
+  'hso*',
+  'em+([0-9])?(_+([0-9]))*',
+  'p+([0-9])p+([0-9])?(_+([0-9]))*',
+  'eth*',
+  'ath*',
+  'wlan*',
+  'ppp*',
+  '*'
+]
