@@ -58,6 +58,28 @@ applications to change nameserver settings on the fly.
 ```ruby
 node['resolvconf']['wipe-runtime-directory'] = false
 ```
+You can set a list of interfaces that you want to inherit the dns settings from. It creates the 
+interface-order file /etc/resolvconf/interface-order and builds it from the list.
+This enables you to control which additional dns servers if any are added from which interfaces.
+```ruby
+node['resolvconf']['interface-order'] = [
+  'lo.inet*',
+  'lo.dnsmasq',
+  'lo.pdnsd',
+  'lo.!(pdns|pdns-recursor)',
+  'lo',
+  'tun*',
+  'tap*',
+  'hso*',
+  'em+([0-9])?(_+([0-9]))*',
+  'p+([0-9])p+([0-9])?(_+([0-9]))*',
+  'eth*',
+  'ath*',
+  'wlan*',
+  'ppp*',
+  '*'
+]
+```
 
 
 ## Provider
