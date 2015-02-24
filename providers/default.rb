@@ -27,10 +27,9 @@ action :create do
   options['base'] += Array(new_resource.options).map { |opt| "options #{opt}" }
   options['base'] += Array(new_resource.base)
   options['tail'] = Array(new_resource.tail)
-  any_configuration_updated = false
 
   options.each do |name, _|
-    r = file "/etc/resolvconf/resolv.conf.d/#{name}" do
+    file "/etc/resolvconf/resolv.conf.d/#{name}" do
       mode    00644
       content "#{options[name].join("\n")}\n"
 
@@ -41,9 +40,8 @@ action :create do
       # Due to a bug in chef (fixed with https://github.com/opscode/chef/pull/1383, but not released yet),
       # we need to check whether the file actually exists before setting force_unlink
       force_unlink true if ::File.exist?("/etc/resolvconf/resolv.conf.d/#{name}")
+      notifies :run, "execute[resolvconf -u]"
     end
-    any_configuration_updated ||= r.updated_by_last_action?
-    new_resource.updated_by_last_action(true) if r.updated_by_last_action?
   end
 
   if new_resource.clear_dns_from_interfaces
@@ -62,7 +60,15 @@ action :create do
     ignore_failure true
   end
   
+  template '/etc/resolvconf/interface-order' do
+    source 'interface-order.erb'
+    variables(
+      :interfaces => node['resolvconf']['interface-order']
+      )
+    notifies :run, "execute[resolvconf -u]"
+  end
+
   execute 'resolvconf -u' do
-    only_if { any_configuration_updated }
+    action :nothing
   end
 end
