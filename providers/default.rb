@@ -62,6 +62,7 @@ action :create do
   
   template '/etc/resolvconf/interface-order' do
     source 'interface-order.erb'
+    cookbook 'resolvconf'
     variables(
       :interfaces => new_resource.interface_order
       )
