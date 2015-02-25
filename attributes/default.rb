@@ -42,7 +42,6 @@ default['resolvconf']['wipe-runtime-directory'] = false
 
 # these are the defaults, so lets place them here as to not disrupt the current state of things.
 default['resolvconf']['interface-order'] = [
-  'lo.inet*',
   'lo.dnsmasq',
   'lo.pdnsd',
   'lo.!(pdns|pdns-recursor)',

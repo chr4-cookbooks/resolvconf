@@ -63,7 +63,7 @@ action :create do
   template '/etc/resolvconf/interface-order' do
     source 'interface-order.erb'
     variables(
-      :interfaces => node['resolvconf']['interface-order']
+      :interfaces => new_resource.interface_order
       )
     notifies :run, "execute[resolvconf -u]"
   end
