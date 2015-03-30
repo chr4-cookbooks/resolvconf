@@ -50,6 +50,12 @@ action :create do
     interfaces.write_file
   end
 
+  # Make sure /etc/resolv.conf is a symlink to resolvconf
+  link '/etc/resolv.conf' do
+    to '/run/resolvconf/resolv.conf'
+    only_if { ::File.exist?('/run/resolvconf/resolv.conf') }
+  end
+
   # Wipe old configuration settings from runtime directory, as they'd end up in /etc/resolv.conf
   # otherwise. Older systems do not support this, should fail silently though.
   execute 'rm -f /run/resolvconf/interface/*' if node['resolvconf']['wipe-runtime-directory']
@@ -59,7 +65,7 @@ action :create do
     not_if "resolvconf --updates-are-enabled"
     ignore_failure true
   end
-  
+
   template '/etc/resolvconf/interface-order' do
     source 'interface-order.erb'
     cookbook 'resolvconf'
