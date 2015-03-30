@@ -2,6 +2,11 @@
 
 This file is used to list changes made in each version of resolvconf.
 
+## 0.2.7:
+
+- Add support for interface-order
+- Make sure `/etc/resolv.conf` is a symlink to `/run/resolvconf/resolv.conf`
+
 ## 0.2.6:
 
 - `/run/resolvconf/interface/` is wiped only when `node['resolvconf']['wipe-runtime-directory']` is
