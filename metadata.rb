@@ -46,3 +46,7 @@ attribute 'resolvconf/tail',
 attribute 'resolvconf/clear-dns-from-interfaces',
           description: 'Remove dns-* settings from /etc/network/interfaces, as they might interferre with the configured settings',
           default: 'true'
+
+attribute 'resolvconf/wipe-runtime-directory',
+          description: 'Wipe runtime directory to make sure old resolv.conf entries are properly removed',
+          default: 'false'
