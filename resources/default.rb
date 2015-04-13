@@ -32,9 +32,9 @@ attribute :clear_dns_from_interfaces,
           kind_of: [TrueClass, FalseClass],
           default: node['resolvconf']['clear-dns-from-interfaces']
 
-# set interface order file in /etc/resolvconf/interface-order
-attribute :interface_order, 
-          kind_of: [Array], 
+# Set interface order file in /etc/resolvconf/interface-order
+attribute :interface_order,
+          kind_of: [Array],
           default: node['resolvconf']['interface-order']
 
 # These elements will be placed in the corresponding file in /etc/resolvconf/resolv.conf.d/
