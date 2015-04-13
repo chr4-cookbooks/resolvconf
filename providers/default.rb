@@ -58,7 +58,7 @@ action :create do
 
   # Wipe old configuration settings from runtime directory, as they'd end up in /etc/resolv.conf
   # otherwise. Older systems do not support this, should fail silently though.
-  execute 'rm -f /run/resolvconf/interface/*' if node['resolvconf']['wipe-runtime-directory']
+  execute 'rm -f /run/resolvconf/interface/*' if new_resource.wipe_runtime_directory
 
   execute 'resolvconf --enable-updates' do
     # Older systems do not support --enable-updates, but should work nonetheless

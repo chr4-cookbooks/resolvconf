@@ -37,6 +37,11 @@ attribute :interface_order,
           kind_of: [Array],
           default: node['resolvconf']['interface-order']
 
+# Wipe all entries from /run/resolvconf/interfaces
+attribute :wipe_runtime_directory,
+          kind_of: [TrueClass, FalseClass],
+          default: node['resolvconf']['wipe-runtime-directory']
+
 # These elements will be placed in the corresponding file in /etc/resolvconf/resolv.conf.d/
 attribute :head, kind_of: [Array, String], default: node['resolvconf']['head']
 attribute :base, kind_of: [Array, String], default: node['resolvconf']['base']
