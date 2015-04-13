@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of resolvconf.
 
+## 0.2.8:
+
+- Allow `wipe_runtime_directory` to be specified as resource attribute. Defaults to node attribute.
+
 ## 0.2.7:
 
 - Add support for interface-order
