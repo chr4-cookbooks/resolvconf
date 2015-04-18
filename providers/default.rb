@@ -18,6 +18,12 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+# Converging the resource in a sub chef-run will ensure that:
+# - `resolvconf -u` is invoked as soon as this resource is converged.
+#   see https://github.com/chr4-cookbooks/resolvconf/issues/10
+# - callers are notified when (any of the internal resources is) updated
+use_inline_resources
+
 action :create do
   options = {}
   options['head'] = Array(new_resource.head)
