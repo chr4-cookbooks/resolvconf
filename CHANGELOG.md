@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of resolvconf.
 
+## 0.2.9:
+
+- Use `use_inline_resources` to fix a bug with `resolvconf -u` not being immediately called.
+
 ## 0.2.8:
 
 - Allow `wipe_runtime_directory` to be specified as resource attribute. Defaults to node attribute.
