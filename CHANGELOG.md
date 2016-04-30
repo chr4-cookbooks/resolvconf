@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of resolvconf.
 
+## 0.2.10:
+
+- Add custom matcher for ChefSpec
+
 ## 0.2.9:
 
 - Use `use_inline_resources` to fix a bug with `resolvconf -u` not being immediately called.
