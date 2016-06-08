@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of resolvconf.
 
+## 0.3.0:
+
+- Add default interface names for Ubuntu Xenial 16.04
+
 ## 0.2.10:
 
 - Add custom matcher for ChefSpec
