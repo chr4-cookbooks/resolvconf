@@ -40,20 +40,49 @@ default['resolvconf']['clear-dns-from-interfaces'] = true
 # nameserver entries.
 default['resolvconf']['wipe-runtime-directory'] = false
 
-# these are the defaults, so lets place them here as to not disrupt the current state of things.
-default['resolvconf']['interface-order'] = [
-  'lo.dnsmasq',
-  'lo.pdnsd',
-  'lo.!(pdns|pdns-recursor)',
-  'lo',
-  'tun*',
-  'tap*',
-  'hso*',
-  'em+([0-9])?(_+([0-9]))*',
-  'p+([0-9])p+([0-9])?(_+([0-9]))*',
-  'eth*',
-  'ath*',
-  'wlan*',
-  'ppp*',
-  '*'
-]
+# These are the defaults, so lets place them here as to not disrupt the current state of things.
+default['resolvconf']['interface-order'] =
+  # Xenial updated the defaults
+  if node['platform_version'].to_f >= 16.04
+    [
+      'lo.inet6',
+      'lo.inet',
+      'lo.@(dnsmasq|pdnsd)',
+      'lo.!(pdns|pdns-recursor)',
+      'lo',
+      'tun*',
+      'tap*',
+      'hso*',
+      'em+([0-9])?(_+([0-9]))*',
+      'p+([0-9])p+([0-9])?(_+([0-9]))*',
+      '@(br|eth)*([^.]).inet6',
+      '@(br|eth)*([^.]).ip6.@(dhclient|dhcpcd|pump|udhcpc)',
+      '@(br|eth)*([^.]).inet',
+      '@(br|eth)*([^.]).@(dhclient|dhcpcd|pump|udhcpc)',
+      '@(br|eth)*',
+      '@(ath|wifi|wlan)*([^.]).inet6',
+      '@(ath|wifi|wlan)*([^.]).ip6.@(dhclient|dhcpcd|pump|udhcpc)',
+      '@(ath|wifi|wlan)*([^.]).inet',
+      '@(ath|wifi|wlan)*([^.]).@(dhclient|dhcpcd|pump|udhcpc)',
+      '@(ath|wifi|wlan)*',
+      'ppp*',
+      '*',
+    ]
+  else
+    [
+      'lo.dnsmasq',
+      'lo.pdnsd',
+      'lo.!(pdns|pdns-recursor)',
+      'lo',
+      'tun*',
+      'tap*',
+      'hso*',
+      'em+([0-9])?(_+([0-9]))*',
+      'p+([0-9])p+([0-9])?(_+([0-9]))*',
+      'eth*',
+      'ath*',
+      'wlan*',
+      'ppp*',
+      '*'
+    ]
+  end
