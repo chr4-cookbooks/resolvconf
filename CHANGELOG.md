@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of resolvconf.
 
+## 0.4.0:
+
+- Remove support for Ubuntu 10.04 (Official support ended Q1 2015)
+
 ## 0.3.0:
 
 - Add default interface names for Ubuntu Xenial 16.04

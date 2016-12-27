@@ -22,6 +22,7 @@ when "debian"
 
 	include_recipe 'resolvconf::install'
 
+
 	# TODO: This fix needs to be removed once Ubuntu 10.04 support runs out (Q1 2015)
 	if value_for_platform('ubuntu' => { '10.04' => true }, 'default' => false)
 	  # Fix buggy behaviour of resolvconf in Ubuntu 10.04 (Debian bug #642222)
@@ -39,3 +40,6 @@ when "debian"
 
 	resolvconf 'default'
 end
+
+resolvconf 'default'
+
