@@ -2,6 +2,11 @@
 
 This file is used to list changes made in each version of resolvconf.
 
+## 1.0.0:
+
+- Remove default nameservers. Make sure you set them before migrating to this version!
+  See [this issue](https://github.com/chr4-cookbooks/resolvconf/pull/18) for details.
+
 ## 0.4.0:
 
 - Remove support for Ubuntu 10.04 (Official support ended Q1 2015)
