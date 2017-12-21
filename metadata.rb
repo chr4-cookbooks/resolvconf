@@ -1,6 +1,8 @@
 name             'resolvconf'
 maintainer       'Chris Aumann'
 maintainer_email 'me@chr4.org'
+source_url       'https://github.com/chr4-cookbooks/resolvconf'
+issues_url       'https://github.com/chr4-cookbooks/resolvconf/issues'
 license          'GNU Public License 3.0'
 description      'Installs/Configures resolvconf'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
