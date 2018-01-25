@@ -37,7 +37,9 @@ attribute :interface_order,
           kind_of: [Array],
           default: node['resolvconf']['interface-order'].dup
 
-# Wipe all entries from /run/resolvconf/interfaces
+# Wipe runtime directory to make sure old resolv.conf entries are properly removed.
+# This is not enabled by default, as it breaks the dynamic capabilities for applications to change
+# nameserver entries.
 attribute :wipe_runtime_directory,
           kind_of: [TrueClass, FalseClass],
           default: false
