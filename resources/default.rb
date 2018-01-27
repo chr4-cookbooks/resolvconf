@@ -22,27 +22,29 @@ actions        :create
 default_action :create
 
 # DNS options (default to OpenDNS nameservers)
-attribute :nameserver, kind_of: [Array, String], default: node['resolvconf']['nameserver']
-attribute :search,     kind_of: [Array, String], default: node['resolvconf']['search']
-attribute :options,    kind_of: [Array, String], default: node['resolvconf']['options']
-attribute :sortlist,   kind_of: [Array, String], default: node['resolvconf']['sortlist']
+attribute :nameserver, kind_of: [Array, String], default: []
+attribute :search,     kind_of: [Array, String], default: node['domain'].dup
+attribute :options,    kind_of: [Array, String], default: []
+attribute :sortlist,   kind_of: [Array, String], default: []
 
 # Remove all dns-* entries from /etc/network/interfaces
 attribute :clear_dns_from_interfaces,
           kind_of: [TrueClass, FalseClass],
-          default: node['resolvconf']['clear-dns-from-interfaces']
+          default: true
 
 # Set interface order file in /etc/resolvconf/interface-order
 attribute :interface_order,
           kind_of: [Array],
-          default: node['resolvconf']['interface-order']
+          default: node['resolvconf']['interface-order'].dup
 
-# Wipe all entries from /run/resolvconf/interfaces
+# Wipe runtime directory to make sure old resolv.conf entries are properly removed.
+# This is not enabled by default, as it breaks the dynamic capabilities for applications to change
+# nameserver entries.
 attribute :wipe_runtime_directory,
           kind_of: [TrueClass, FalseClass],
-          default: node['resolvconf']['wipe-runtime-directory']
+          default: false
 
 # These elements will be placed in the corresponding file in /etc/resolvconf/resolv.conf.d/
-attribute :head, kind_of: [Array, String], default: node['resolvconf']['head']
-attribute :base, kind_of: [Array, String], default: node['resolvconf']['base']
-attribute :tail, kind_of: [Array, String], default: node['resolvconf']['tail']
+attribute :head, kind_of: [Array, String], default: node['resolvconf']['head'].dup
+attribute :base, kind_of: [Array, String], default: []
+attribute :tail, kind_of: [Array, String], default: []
