@@ -22,29 +22,27 @@ actions        :create
 default_action :create
 
 # DNS options (default to OpenDNS nameservers)
-attribute :nameserver, kind_of: [Array, String], default: []
-attribute :search,     kind_of: [Array, String], default: node['domain'].dup
-attribute :options,    kind_of: [Array, String], default: []
-attribute :sortlist,   kind_of: [Array, String], default: []
+attribute :nameserver, kind_of: [Array, String], default: node['resolvconf']['nameserver']
+attribute :search,     kind_of: [Array, String], default: node['resolvconf']['search']
+attribute :options,    kind_of: [Array, String], default: node['resolvconf']['options']
+attribute :sortlist,   kind_of: [Array, String], default: node['resolvconf']['sortlist']
 
 # Remove all dns-* entries from /etc/network/interfaces
 attribute :clear_dns_from_interfaces,
           kind_of: [TrueClass, FalseClass],
-          default: true
+          default: node['resolvconf']['clear-dns-from-interfaces']
 
 # Set interface order file in /etc/resolvconf/interface-order
 attribute :interface_order,
           kind_of: [Array],
-          default: node['resolvconf']['interface-order'].dup
+          default: node['resolvconf']['interface-order']
 
-# Wipe runtime directory to make sure old resolv.conf entries are properly removed.
-# This is not enabled by default, as it breaks the dynamic capabilities for applications to change
-# nameserver entries.
+# Wipe all entries from /run/resolvconf/interfaces
 attribute :wipe_runtime_directory,
           kind_of: [TrueClass, FalseClass],
-          default: false
+          default: node['resolvconf']['wipe-runtime-directory']
 
 # These elements will be placed in the corresponding file in /etc/resolvconf/resolv.conf.d/
-attribute :head, kind_of: [Array, String], default: node['resolvconf']['head'].dup
-attribute :base, kind_of: [Array, String], default: []
-attribute :tail, kind_of: [Array, String], default: []
+attribute :head, kind_of: [Array, String], default: node['resolvconf']['head']
+attribute :base, kind_of: [Array, String], default: node['resolvconf']['base']
+attribute :tail, kind_of: [Array, String], default: node['resolvconf']['tail']
